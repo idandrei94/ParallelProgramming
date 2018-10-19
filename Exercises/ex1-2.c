@@ -67,7 +67,7 @@ int main(void)
 {
 	int n = 46;
 	unsigned long long fib;
-	printf("Algorithm\t\tN value\t\tResult\t\t\tCPU time\tReal time\n\n");
+	printf("Algorithm\t\tN value\t\tResult\t\t\tCPU time\tReal time\n");
 	printf("-----------------------------------------------------------------------------------------\n");
 	time_t start_time = time(NULL);
 	clock_t start_clock = clock();
