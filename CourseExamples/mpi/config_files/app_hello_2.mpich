@@ -1,0 +1,27 @@
+# Application file for "hello2_mpi, hello2_slave_mpi".
+#
+# Application files are used for Multiple Program Multiple Data (MPMD)
+# applications and define which program should run on which computer
+# of the virtual computer.
+#
+#
+# Usage:
+#   mpiexec -configfile app_hello_2.mpich
+#
+#
+# File: app_hello_2.mpich		Author: S. Gross
+# Date: 04.08.2017
+#
+
+
+# Syntax:
+#
+# Specify all options for mpirun/mpiexec without the mpi-command
+# itself on a separate line for each program/computer. The process
+# with rank 0 runs always on the first computer of the list of
+# computers.
+#
+
+-n 1 -host pc03.informatik.hs-fulda.de hello2_mpi
+-n 1 -host pc03.informatik.hs-fulda.de hello2_slave_mpi
+-n 1 -host pc04.informatik.hs-fulda.de hello2_slave_mpi

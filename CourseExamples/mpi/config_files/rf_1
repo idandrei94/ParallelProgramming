@@ -1,0 +1,12 @@
+# Rankfile to bind processes to specific cores, sockets, ...
+#
+#
+# Usage:
+#   mpiexec -report-bindings -np 4 -rf rf_1 hostname
+#
+#
+# File: rf_1				Author: S. Gross
+# Date: 04.08.2017
+#
+
+rank 0=pc03 slot=0:0-2;1:3-5

@@ -1,0 +1,17 @@
+# Host file for Open MPI.
+#
+#
+# Usage:
+#   mpiexec --hostfile <host file> -np <number of processes> <program>
+#
+#
+# File: hosts.openmpi			Author: S. Gross
+# Date: 04.08.2017
+#
+
+# Syntax:
+# <hostname> [slots=<number of virtual cpu's>]
+#   [max_slots=<max. number of processes>] [username=<login name>]
+
+pc03.informatik.hs-fulda.de slots=4 max_slots=24
+pc04.informatik.hs-fulda.de slots=4 max_slots=24

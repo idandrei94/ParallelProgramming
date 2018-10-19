@@ -1,0 +1,17 @@
+# Rankfile to bind processes to specific cores, sockets, ... This
+# file can be used for openmpi-1.7.x or newer which use ";" to
+# separate sockets and have different options than older versions.
+#
+#
+# Usage:
+#   mpiexec -report-bindings -np 4 -rf rf_loki_pc03_nfs2 hostname
+#
+#
+# File: rf_loki_pc03_nfs2		Author: S. Gross
+# Date: 06.06.2018
+#
+
+rank 0=loki slot=0:0-5;1:0-3
+rank 1=loki slot=1:4-5
+rank 2=pc03 slot=0:0-5
+rank 3=nfs2 slot=1:0
