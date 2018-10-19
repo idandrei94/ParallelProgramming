@@ -62,8 +62,13 @@ unsigned long long fibonacci_rec(int n)
 
 int main(void)
 {
-	time_t start = time(NULL);
-	int n = 10;
-	unsigned long long fib = fibonacci_rec(n);
-	printf("Completed, Fibonacci #%d is %d, CPU time: %d, Real time: %d\n", n, fib, clock(), start-time(NULL));
+	time_t start_time = time(NULL);
+	clock_t start_clock = clock();
+	int n = 40;
+	unsigned long long fib = fibonacci_seq(n);
+	printf("Completed sequenctial, Fibonacci #%d is %d, CPU time: %d, Real time: %d\n", n, fib, clock()-start_clock, time(NULL)-start_time);
+	start_time = time(NULL);
+	start_clock = clock();
+	fib = fibonacci_rec(n);
+	printf("Completed recurrence, Fibonacci #%d is %d, CPU time: %d, Real time: %d\n", n, fib, clock()-start_clock, time(NULL)-start_time);
 }
