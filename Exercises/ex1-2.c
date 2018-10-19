@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 
+#define CACHE_SIZE 10000
 
 unsigned long long fibonacci_seq(int n) 
 {
@@ -26,7 +27,7 @@ unsigned long long fibonacci_seq(int n)
 	}
 }
 
-unsigned long long fibonacci_list[1000];
+unsigned long long fibonacci_list[CACHE_SIZE];
 
 unsigned long long fibonacci_rec(int n)
 {
@@ -39,17 +40,19 @@ unsigned long long fibonacci_rec(int n)
 		default:
 		;
 			unsigned long long fib1, fib2;
-			if(fibonacci_list[n-2] == 0) 
+			if(n-2 >= CACHE_SIZE || fibonacci_list[n-2] == 0) 
 			{
 				fib1 = fibonacci_rec(n-2);
-				fibonacci_list[n-2] = fib1;
+				if(n-2 < CACHE_SIZE)
+					fibonacci_list[n-2] = fib1;
 			}
 			else
 				fib1 = fibonacci_list[n-2];
-			if(fibonacci_list[n-1] == 0) 
+			if(n-1 >= CACHE_SIZE || fibonacci_list[n-1] == 0) 
 			{
 				fib2 = fibonacci_rec(n-1);
-				fibonacci_list[n-1] = fib2;
+				if(n-1 < CACHE_SIZE)
+					fibonacci_list[n-1] = fib2;
 			}
 			else
 				fib2 = fibonacci_list[n-1];
@@ -62,13 +65,16 @@ unsigned long long fibonacci_rec(int n)
 
 int main(void)
 {
+	int n = 46;
+	unsigned long long fib;
+	printf("Algorithm\t\tN value\t\tResult\t\t\tCPU time\tReal time\n\n");
+	printf("-----------------------------------------------------------------------------------------\n");
 	time_t start_time = time(NULL);
 	clock_t start_clock = clock();
-	int n = 40;
-	unsigned long long fib = fibonacci_seq(n);
-	printf("Completed sequenctial, Fibonacci #%d is %d, CPU time: %d, Real time: %d\n", n, fib, clock()-start_clock, time(NULL)-start_time);
+	fib = fibonacci_seq(n);++fib;--fib;
+	printf("Sequential\t\t%d\t\t%d\t\t%d\t\t%d\n", n, fib, clock()-start_clock, time(NULL)-start_time);
 	start_time = time(NULL);
 	start_clock = clock();
-	fib = fibonacci_rec(n);
-	printf("Completed recurrence, Fibonacci #%d is %d, CPU time: %d, Real time: %d\n", n, fib, clock()-start_clock, time(NULL)-start_time);
+	fib = fibonacci_rec(n);++fib;--fib;
+	printf("Recurrent\t\t%d\t\t%d\t\t%d\t\t%d\n", n, fib, clock()-start_clock, time(NULL)-start_time);
 }
